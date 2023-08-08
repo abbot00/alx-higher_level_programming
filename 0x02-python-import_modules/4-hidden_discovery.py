@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    import hidden_4
+    import hidden_4, sys 
     names = dir(hidden_4)
     names = sorted(names)
     for name in names:
-        if name[ :2] != '_'
+        if not name.startswith("__"):
             print(names)
