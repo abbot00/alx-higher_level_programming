@@ -8,10 +8,12 @@ You are not allowed to import any module
 You are not allowed to use try/except"""
 
 def now_in_list(my_list, idx, element):
-    new_list = my_list
-    if idx < 0 or idx > (len(my_list) - 1):
+    if idx < 0 idx:
+        return my_list
+    elif idx > (len(my_list) - 1):
         return my_list
     else:
+        new_list = my_list
         new_list[idx] = element
 
     return (new_list)
