@@ -12,7 +12,7 @@ of element in my_list), the function should
 You are not allowed to import any module
 You are not allowed to use try/except"""
 
-def now_in_list(my_list, idx, element):
+def new_in_list(my_list, idx, element):
     if idx < 0 idx:
         return my_list
     elif idx > (len(my_list) - 1):
