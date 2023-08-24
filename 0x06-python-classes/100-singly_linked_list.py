@@ -1,4 +1,9 @@
+#!/usr/bin/python3
+"""class that defines a Node"""
+
+
 class Node:
+    """attributes"""
     def __init__(self, data, next_node=None):
         self.__data = None
         self.__next_node = None
@@ -26,7 +31,11 @@ class Node:
         self.__next_node = value
 
 
+"""class that defines a list"""
+
+
 class SinglyLinkedList:
+    """attributes"""
     def __init__(self):
         self.head = None
     
