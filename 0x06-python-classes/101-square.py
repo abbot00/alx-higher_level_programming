@@ -3,7 +3,7 @@
 
 
 class Square:
-    """initialazation of the attributes of the class"""
+    """initialization of the attributes of the class"""
     def __init__(self, size=0, position=(0, 0)):
         self.size = size
         self.position = position
