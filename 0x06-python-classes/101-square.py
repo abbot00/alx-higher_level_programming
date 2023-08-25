@@ -46,9 +46,6 @@ class Square:
                 print(' ' * self.__position[0], end='')
                 print('#' * self.__size)
 
-    '''def __str__(self):
-        return "\n".join([" " * self.position[0] + "#" * self.size
-                          for _ in range(self.size)])'''
-
     def __str__(self):
-        return str(self.my_print())
+        return "\n".join([" " * self.position[0] + "#" * self.size
+                          for _ in range(self.size)])
