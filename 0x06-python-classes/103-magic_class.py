@@ -4,6 +4,7 @@ import math
 
 
 class MagicClass:
+    """_summary_    """
     def __init__(self, radius=0):
         self.__radius = 0
 
