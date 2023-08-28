@@ -1,0 +1,22 @@
+"""
+Test cases for the say_my_name function.
+"""
+
+# Test case 1 (Both first_name and last_name provided)
+>>> say_my_name("John", "Smith")
+My name is John Smith
+
+# Test case 2 (Both first_name and last_name provided)
+>>> say_my_name("Walter", "White")
+My name is Walter White
+
+# Test case 3 (Only first_name provided)
+>>> say_my_name("Bob")
+My name is Bob 
+
+# Test case 4 (Invalid first_name - non-string)
+>>> try:
+...     say_my_name(12, "White")
+... except Exception as e:
+...     print(e)
+first_name must be a string
