@@ -1,22 +1,93 @@
-def matrix_mul(m_a, m_b):
-    """
-    Multiplies two matrices.
+# Test cases for matrix_mul function
 
-    Args:
-        m_a (list of lists): The first matrix containing integers or floats.
-        m_b (list of lists): The second matrix containing integers or floats.
+# Test 1: Valid multiplication
+# 2x3 matrix multiplied by a 3x2 matrix
+input_m_a_1 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_1 = [[7, 8], [9, 10], [11, 12]]
+expected_output_1 = [[58, 64], [139, 154]]
 
-    Returns:
-        list of lists: A new matrix resulting from the multiplication.
+# Test 2: Invalid multiplication due to incompatible dimensions
+# 2x3 matrix multiplied by a 2x2 matrix
+input_m_a_2 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_2 = [[7, 8], [9, 10]]
+expected_error_2 = "m_a and m_b can't be multiplied"
 
-    Raises:
-        TypeError: If m_a or m_b is not a list of lists containing integers or floats,
-                   or if rows of m_a and m_b are not of the same size.
-        ValueError: If m_a or m_b is empty, or if m_a and m_b cannot be multiplied.
+# Test 3: Invalid matrix m_a due to non-numeric element
+input_m_a_3 = [[1, 2, 'a'], [4, 5, 6]]
+input_m_b_3 = [[7, 8], [9, 10], [11, 12]]
+expected_error_3 = "m_a should contain only integers or floats"
 
-    Example:
-        >>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
-        [[7, 10], [15, 22]]
-        >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
-        [[13, 16]]
-    """
+# Test 4: Invalid matrix m_b due to non-numeric element
+input_m_a_4 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_4 = [[7, 8], [9, 10], [11, 'b']]
+expected_error_4 = "m_b should contain only integers or floats"
+
+# Test 5: Invalid matrix m_a due to inconsistent row size
+input_m_a_5 = [[1, 2, 3], [4, 5]]
+input_m_b_5 = [[7, 8], [9, 10], [11, 12]]
+expected_error_5 = "each row of m_a must be of the same size"
+
+# Test 6: Invalid matrix m_b due to inconsistent row size
+input_m_a_6 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_6 = [[7, 8, 9], [10, 11], [12, 13, 14]]
+expected_error_6 = "each row of m_b must be of the same size"
+
+# Test 7: Empty matrix m_a
+input_m_a_7 = []
+input_m_b_7 = [[7, 8], [9, 10], [11, 12]]
+expected_error_7 = "m_a can't be empty"
+
+# Test 8: Empty matrix m_b
+input_m_a_8 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_8 = []
+expected_error_8 = "m_b can't be empty"
+
+# Test 9: Invalid matrix m_a due to being a non-list
+input_m_a_9 = 123
+input_m_b_9 = [[7, 8], [9, 10], [11, 12]]
+expected_error_9 = "m_a must be a list"
+
+# Test 10: Invalid matrix m_b due to being a non-list
+input_m_a_10 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_10 = 'hello'
+expected_error_10 = "m_b must be a list"
+
+# Test 11: Invalid matrix m_a due to not being a list of lists
+input_m_a_11 = [1, 2, 3]
+input_m_b_11 = [[7, 8], [9, 10], [11, 12]]
+expected_error_11 = "m_a must be a list of lists"
+
+# Test 12: Invalid matrix m_b due to not being a list of lists
+input_m_a_12 = [[1, 2, 3], [4, 5, 6]]
+input_m_b_12 = [7, 8, 9]
+expected_error_12 = "m_b must be a list of lists"
+
+# Combine test cases and expected results
+test_cases = [
+    (input_m_a_1, input_m_b_1, expected_output_1),
+    (input_m_a_2, input_m_b_2, expected_error_2),
+    (input_m_a_3, input_m_b_3, expected_error_3),
+    (input_m_a_4, input_m_b_4, expected_error_4),
+    (input_m_a_5, input_m_b_5, expected_error_5),
+    (input_m_a_6, input_m_b_6, expected_error_6),
+    (input_m_a_7, input_m_b_7, expected_error_7),
+    (input_m_a_8, input_m_b_8, expected_error_8),
+    (input_m_a_9, input_m_b_9, expected_error_9),
+    (input_m_a_10, input_m_b_10, expected_error_10),
+    (input_m_a_11, input_m_b_11, expected_error_11),
+    (input_m_a_12, input_m_b_12, expected_error_12)
+]
+
+# Run tests
+for index, (m_a, m_b, expected) in enumerate(test_cases):
+    try:
+        result = matrix_mul(m_a, m_b)
+        if result == expected:
+            print(f"Test case {index + 1}: Passed")
+        else:
+            print(f"Test case {index + 1}: Failed - Expected {expected}, but got {result}")
+    except (TypeError, ValueError) as e:
+        if str(e) == expected:
+            print(f"Test case {index + 1}: Passed")
+        else:
+            print(f"Test case {index + 1}: Failed - Expected {expected}, but got {str(e)}")
