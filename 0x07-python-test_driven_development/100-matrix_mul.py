@@ -21,17 +21,46 @@ def matrix_mul(m_a, m_b):
         >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
         [[13, 16]]
     """
+    if not isinstance(m_a, list):
+        raise TypeError("m_a must be a list")
+    if not isinstance(m_b, list):
+        raise TypeError("m_b must be a list")
+    if not all(isinstance(row, list) for row in m_a):
+        raise TypeError("m_a must be a list of lists")
+    if not all(isinstance(row, list) for row in m_b):
+        raise TypeError("m_b must be a list of lists")
+    # Check if m_a is empty
+    if not m_a:
+        raise ValueError("m_a can't be empty")
+    
+    # Check if m_b is empty
+    if not m_b:
+        raise ValueError("m_b can't be empty")
+    # Check if m_a is a list of lists containing only integers or floats
+    for row in m_a:
+        if not all(isinstance(num, (int, float)) for num in row):
+            raise TypeError("m_a should contain only integers or floats")
+    
+    # Check if m_b is a list of lists containing only integers or floats
+    for row in m_b:
+        if not all(isinstance(num, (int, float)) for num in row):
+            raise TypeError("m_b should contain only integers or floats")
+    # Check if all rows of m_a are of the same size
+    row_lengths_a = set(len(row) for row in m_a)
+    if len(row_lengths_a) != 1:
+        raise TypeError("each row of m_a must be of the same size")
 
-    if not all(isinstance(row, list) and all(isinstance(num, (int, float)) for num in row)
-               for row in m_a):
-        raise TypeError("m_a should contain only integers or floats")
-    if not all(isinstance(row, list) and all(isinstance(num, (int, float)) for num in row)
-               for row in m_b):
-        raise TypeError("m_b should contain only integers or floats")
+    # Check if all rows of m_b are of the same size
+    row_lengths_b = set(len(row) for row in m_b)
+    if len(row_lengths_b) != 1:
+        raise TypeError("each row of m_b must be of the same size")
+     # Check if the number of columns in m_a is equal to the number of rows in m_b
+    num_columns_a = len(m_a[0])
+    num_rows_b = len(m_b)
+    if num_columns_a != num_rows_b:
+        raise ValueError("m_a and m_b can't be multiplied")
 
-    if len(m_a) == 0 or len(m_b) == 0:
-        raise ValueError("m_a can't be empty" if len(m_a) == 0 else "m_b can't be empty")
-
+    
     a_rows = len(m_a)
     a_cols = len(m_a[0])
     b_rows = len(m_b)
@@ -46,7 +75,7 @@ def matrix_mul(m_a, m_b):
             raise TypeError("each row of m_b must be of the same size")
 
     if a_cols != b_rows:
-        raise ValueError("m_a and m_b can't be multiplied")
+        raise ValueError("m_a and m_b can't be empty")
 
     result = [[0 for _ in range(b_cols)] for _ in range(a_rows)]
     for i in range(a_rows):
@@ -55,3 +84,42 @@ def matrix_mul(m_a, m_b):
                 result[i][j] += m_a[i][k] * m_b[k][j]
 
     return result
+
+
+print(matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+print(matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
+
+m_a = "Holberton"
+m_b = [[5, 6], [7, 8]]
+try:
+    print(matrix_mul(m_a, m_b))
+except Exception as e:
+    print(e)
+
+m_a = [[1, 2], [3, 4]]
+m_b = "Holberton"
+try:
+    print(matrix_mul(m_a, m_b))
+except Exception as e:
+    print(e)
+
+m_a = [1, 2, 3, 4]
+m_b = [[5, 6], [7, 8]]
+try:
+    print(matrix_mul(m_a, m_b))
+except Exception as e:
+    print(e)
+
+m_a = [[5, 6], [7, 8]]
+m_b = [1, 2, 3, 4]
+try:
+    print(matrix_mul(m_a, m_b))
+except Exception as e:
+    print(e)
+    
+m_a = [[1, 2], [3, 4]]
+m_b = [[]]
+try:
+    print(matrix_mul(m_a, m_b))
+except Exception as e:
+    print(e)
