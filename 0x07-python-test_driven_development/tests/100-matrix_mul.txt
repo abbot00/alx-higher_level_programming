@@ -1,93 +1,94 @@
-# Test cases for matrix_mul function
+# doctest_100-matrix_mul.txt
+===============================
+Tests to 100-matrix_mul.txt
+===============================
 
-# Test 1: Valid multiplication
-# 2x3 matrix multiplied by a 3x2 matrix
-input_m_a_1 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_1 = [[7, 8], [9, 10], [11, 12]]
-expected_output_1 = [[58, 64], [139, 154]]
+This library is for multiply two matrix
+``matrix_mul(m_a, m_b):``.
 
-# Test 2: Invalid multiplication due to incompatible dimensions
-# 2x3 matrix multiplied by a 2x2 matrix
-input_m_a_2 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_2 = [[7, 8], [9, 10]]
-expected_error_2 = "m_a and m_b can't be multiplied"
+File ``100-matrix_mul.py``
 
-# Test 3: Invalid matrix m_a due to non-numeric element
-input_m_a_3 = [[1, 2, 'a'], [4, 5, 6]]
-input_m_b_3 = [[7, 8], [9, 10], [11, 12]]
-expected_error_3 = "m_a should contain only integers or floats"
+Return: New matrix with the result
 
-# Test 4: Invalid matrix m_b due to non-numeric element
-input_m_a_4 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_4 = [[7, 8], [9, 10], [11, 'b']]
-expected_error_4 = "m_b should contain only integers or floats"
+Importing the function:
 
-# Test 5: Invalid matrix m_a due to inconsistent row size
-input_m_a_5 = [[1, 2, 3], [4, 5]]
-input_m_b_5 = [[7, 8], [9, 10], [11, 12]]
-expected_error_5 = "each row of m_a must be of the same size"
+	  >>> matrix_mul = __import__('100-matrix_mul').matrix_mul
 
-# Test 6: Invalid matrix m_b due to inconsistent row size
-input_m_a_6 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_6 = [[7, 8, 9], [10, 11], [12, 13, 14]]
-expected_error_6 = "each row of m_b must be of the same size"
+Test to realize:
 
-# Test 7: Empty matrix m_a
-input_m_a_7 = []
-input_m_b_7 = [[7, 8], [9, 10], [11, 12]]
-expected_error_7 = "m_a can't be empty"
+     >>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+     [[7, 10], [15, 22]]
 
-# Test 8: Empty matrix m_b
-input_m_a_8 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_8 = []
-expected_error_8 = "m_b can't be empty"
+     >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
+     [[13, 16]]
 
-# Test 9: Invalid matrix m_a due to being a non-list
-input_m_a_9 = 123
-input_m_b_9 = [[7, 8], [9, 10], [11, 12]]
-expected_error_9 = "m_a must be a list"
+     >>> matrix_mul([[3, -2], [1, 2]], [[1, 1], [1, 1]])
+     [[1, 1], [3, 3]]
 
-# Test 10: Invalid matrix m_b due to being a non-list
-input_m_a_10 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_10 = 'hello'
-expected_error_10 = "m_b must be a list"
+     >>> matrix_mul([[1.0, 1.0], [2.0, 2.0]], [[1, 1], [1, 1]])
+     [[2.0, 2.0], [4.0, 4.0]]
 
-# Test 11: Invalid matrix m_a due to not being a list of lists
-input_m_a_11 = [1, 2, 3]
-input_m_b_11 = [[7, 8], [9, 10], [11, 12]]
-expected_error_11 = "m_a must be a list of lists"
+     >>> matrix_mul("JavaScript", [[2, 5]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: m_a must be a list
 
-# Test 12: Invalid matrix m_b due to not being a list of lists
-input_m_a_12 = [[1, 2, 3], [4, 5, 6]]
-input_m_b_12 = [7, 8, 9]
-expected_error_12 = "m_b must be a list of lists"
+     >>> matrix_mul([[2], [5]], "JavaScript")
+     Traceback (most recent call last):
+	  ...
+     TypeError: m_b must be a list
 
-# Combine test cases and expected results
-test_cases = [
-    (input_m_a_1, input_m_b_1, expected_output_1),
-    (input_m_a_2, input_m_b_2, expected_error_2),
-    (input_m_a_3, input_m_b_3, expected_error_3),
-    (input_m_a_4, input_m_b_4, expected_error_4),
-    (input_m_a_5, input_m_b_5, expected_error_5),
-    (input_m_a_6, input_m_b_6, expected_error_6),
-    (input_m_a_7, input_m_b_7, expected_error_7),
-    (input_m_a_8, input_m_b_8, expected_error_8),
-    (input_m_a_9, input_m_b_9, expected_error_9),
-    (input_m_a_10, input_m_b_10, expected_error_10),
-    (input_m_a_11, input_m_b_11, expected_error_11),
-    (input_m_a_12, input_m_b_12, expected_error_12)
-]
+     >>> matrix_mul(["C is", "Fun"], [[50, 25]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: m_a must be a list of lists
 
-# Run tests
-for index, (m_a, m_b, expected) in enumerate(test_cases):
-    try:
-        result = matrix_mul(m_a, m_b)
-        if result == expected:
-            print(f"Test case {index + 1}: Passed")
-        else:
-            print(f"Test case {index + 1}: Failed - Expected {expected}, but got {result}")
-    except (TypeError, ValueError) as e:
-        if str(e) == expected:
-            print(f"Test case {index + 1}: Passed")
-        else:
-            print(f"Test case {index + 1}: Failed - Expected {expected}, but got {str(e)}")
+     >>> matrix_mul([[7.5, 30]], ["C is", "Fun"])
+     Traceback (most recent call last):
+	  ...
+     TypeError: m_b must be a list of lists
+
+     >>> matrix_mul([], [[1.9, 90]])
+     Traceback (most recent call last):
+	  ...
+     ValueError: m_a can't be empty
+
+     >>> matrix_mul([[2, 1]], [[]])
+     Traceback (most recent call last):
+	  ...
+     ValueError: m_b can't be empty
+
+     >>> matrix_mul([[3, (1, )], [9, 5]], [[2, 0], [4, 0]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: m_a should contain only integers or floats
+
+     >>> matrix_mul([[3, 1], [9, 5]], [[2, "Diego"], [5, []]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: m_b should contain only integers or floats
+
+     >>> matrix_mul([[3, 8], [0.5]], [[3, 1], [5.2, 51]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: each row of m_a must be of the same size
+
+     >>> matrix_mul([[1, 0], [50, 9.5]], [[5], [10, 80]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: each row of m_b must be of the same size
+
+     >>> matrix_mul([[3, 1, 9], [5, 2, 0]], [[2, 1], [10, 4]])
+     Traceback (most recent call last):
+	  ...
+     ValueError: m_a and m_b can't be multiplied
+
+     >>> matrix_mul([[1, 2], [3, 4]])
+     Traceback (most recent call last):
+	  ...
+     TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+     >>> matrix_mul()
+     Traceback (most recent call last):
+	  ...
+     TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
