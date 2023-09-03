@@ -70,6 +70,7 @@ class Rectangle:
         print("Bye rectangle...")
 
     def bigger_or_equal(rect_1, rect_2):
+        """a method that returns the bigger triangle based on the area"""
         if not isinstance(rect_1, Rectangle):
             raise TypeError("rect_1 must be an intance of Rectangle")
         if not isinstance(rect_2, Rectangle):
