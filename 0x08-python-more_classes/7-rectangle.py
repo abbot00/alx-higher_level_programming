@@ -56,8 +56,8 @@ class Rectangle:
         """method that prints a rectangle with #"""
         if self.__width == 0 or self.__height == 0:
             return ""
-        rect = [Rectangle.print_symbol * self.__width for
-                line in range(self.__height)]
+        rect = [str(Rectangle.print_symbol) * self.__width for
+                character in range(self.__height)]
         return '\n'.join(rect)
 
     def __repr__(self):
