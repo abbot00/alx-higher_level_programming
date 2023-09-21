@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+""" this module contains a function that returns the list of available attribut
+es
+and methods of an object"""
 
 
 def lookup(obj):
